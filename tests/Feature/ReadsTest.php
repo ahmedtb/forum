@@ -43,7 +43,7 @@ class ReadsTest extends TestCase
     {
         $reply = Reply::factory()->create(['thread_id' => $this->thread->id]);
 
-        $this->get($this->thread->path())->assertOK()->assertSee($reply->body);
+        $this->get($this->thread->path())->assertSee($reply->body);
     }
 
 
