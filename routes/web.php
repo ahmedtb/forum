@@ -19,13 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('/threads',[ThreadsController::class,'index']);
-Route::get('/threads/{thread}',[ThreadsController::class,'show']);
+Route::get('/threads',[ThreadsController::class,'index']);
+Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
+Route::get('/threads/create',[ThreadsController::class, 'create']);
+Route::post('/threads',[ThreadsController::class, 'store']);
+/*Route::resource('threads',ThreadsController::class);*/
 
-Route::post('/threads',[ThreadsController::class, 'store']);*/
-Route::resource('threads',ThreadsController::class);
+Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'store']);
 
-Route::post('/threads/{thread}/replies', [RepliesController::class,'store']);
+Route::get('/threads/{channel}',[ThreadsController::class,'index']);
 
 
 Auth::routes();

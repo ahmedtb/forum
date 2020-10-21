@@ -16,9 +16,9 @@ class ParticipateInForumTest extends TestCase
 /** @test */
     function a_non_authenticated_user_can_not_reply()
     {
-        $this->withoutExceptionHandling();
-        $this->expectException('Illuminate\Auth\AuthenticationException');
-        $this->post('/threads/1/replies',[]);
+//        $this->withoutExceptionHandling();
+//        $this->withExceptionHandling();
+        $this->post('/threads/somechannel/1/replies',[])->assertRedirect('/login');
     }
 
     /** @test */
@@ -32,10 +32,21 @@ class ParticipateInForumTest extends TestCase
         $this->be($user);
 
         $reply = Reply::factory()->make();
-//        $this->assertNotEquals($reply->owner->id,$user->id);
 
         $this->post($thread->path() . '/replies', $reply->toArray());
 
         $this->get($thread->path())->assertSee($reply->body);
+    }
+
+    /** @test */
+    function a_reply_requires_body()
+    {
+        $this->signIn();
+
+        $reply = make(Reply::class,['body' => null]);
+        $thread = create(Thread::class);
+
+
+        $this->post($thread->path() . '/replies', $reply->toArray())->assertSessionHasErrors('body');
     }
 }

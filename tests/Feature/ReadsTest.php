@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Channel;
 use App\Models\Reply;
 use App\Models\Thread;
 use App\Models\User;
@@ -46,6 +47,19 @@ class ReadsTest extends TestCase
         $this->get($this->thread->path())->assertSee($reply->body);
     }
 
+
+    /** @test */
+    function a_user_can_fillter_through_channels()
+    {
+        $this->withoutExceptionHandling();
+        $channel = create(Channel::class);
+        $threadInChannel = create(Thread::class,['channel_id' => $channel->id]);
+        $threadNotInChannel = create(Thread::class);
+
+//        dd($threadNotInChannel->title);
+        $this->get('/threads/'.$channel->slug)->assertDontSee($threadNotInChannel->title)->assertSee($threadInChannel->title);
+
+    }
 
 
 }
