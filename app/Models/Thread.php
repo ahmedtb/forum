@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,14 @@ class Thread extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public static function boot()
+    {
+        Parent::boot();
+        static::addGlobalScope('replyCount', function($builder){
+            $builder->withCount('replies');
+        });
+    }
 
     public function path()
     {
@@ -23,10 +32,10 @@ class Thread extends Model
 
     public function creator()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public  function channel()
+    public function channel()
     {
         return $this->belongsTo(Channel::class);
     }
@@ -36,5 +45,8 @@ class Thread extends Model
         $this->replies()->create($reply);
     }
 
-
+    public function scopeFilter($query, ThreadFilters $filters)
+    {
+        return $filters->apply($query);
+    }
 }

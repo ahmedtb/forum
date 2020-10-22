@@ -23,7 +23,6 @@ Route::get('/threads',[ThreadsController::class,'index']);
 Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::get('/threads/create',[ThreadsController::class, 'create']);
 Route::post('/threads',[ThreadsController::class, 'store']);
-/*Route::resource('threads',ThreadsController::class);*/
 
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'store']);
 

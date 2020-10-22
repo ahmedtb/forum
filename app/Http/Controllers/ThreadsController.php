@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\ThreadFilters;
 use App\Models\Channel;
 use App\Models\Thread;
 use Illuminate\Http\Request;
@@ -10,28 +11,33 @@ class ThreadsController extends Controller
 {
     //
 
+
+
     public function __construct(){
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index(Channel $channel)
+    public function index(Channel $channel,ThreadFilters $filters)
     {
-        if($channel->exists)
-        {
-//            $channelId = Channel::where('slug',$channelSlug)->first()->id;
-//            $threads = Thread::where('channel_id',$channelId)->latest()->get();
-            $threads = $channel->threads()->latest()->get();
-        }else{
-            $threads = Thread::latest()->get();
 
+        if ($channel->exists) {
+            $threads = $channel->threads()->latest();
+        } else {
+            $threads = Thread::latest();
         }
+
+        $threads = $threads->filter($filters)->get();
 
         return view('threads.index',compact('threads'));
     }
 
     public function show($channelId, Thread $thread)
     {
-        return view('threads.show',compact('thread'));
+
+        return view('threads.show',[
+            'thread' => $thread,
+            'replies' => $thread->replies()->paginate(1)
+        ]);
     }
 
     public function store(Request $request){
@@ -56,5 +62,15 @@ class ThreadsController extends Controller
     public function create()
     {
         return view('threads.create');
+    }
+
+    /**
+     * @param Channel $channel
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    protected function getThreads(Channel $channel): \Illuminate\Database\Eloquent\Collection
+    {
+
+        return $threads;
     }
 }

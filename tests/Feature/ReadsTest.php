@@ -14,6 +14,8 @@ class ReadsTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $thread;
+
     public function setUp() : void
     {
         parent::setUp();
@@ -61,5 +63,14 @@ class ReadsTest extends TestCase
 
     }
 
+    /** @test */
+    function a_user_can_filter_threads_by_any_username()
+    {
+        $this->signIn(create(User::class,['name' =>  'JohnDoe']) );
+        $threadbyJohn = create(Thread::class,['user_id' => auth()->user()->id]);
+        $threadNotByJohn = create(Thread::class);
 
+        $this->get('/threads?by=JohnDoe')->assertSee($threadbyJohn->title)->assertDontSee($threadNotByJohn->title);
+
+    }
 }
