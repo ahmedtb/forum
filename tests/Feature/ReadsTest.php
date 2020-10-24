@@ -19,20 +19,15 @@ class ReadsTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->thread = Thread::Factory()->create();
+        $this->thread = create(Thread::class);
 
     }
 
     /** @test */
     public function a_user_can_browse_threads()
     {
-
-
         $this->get('/threads')
             ->assertSee($this->thread->title);
-
-
-
     }
 
     /** @test */
@@ -72,5 +67,23 @@ class ReadsTest extends TestCase
 
         $this->get('/threads?by=JohnDoe')->assertSee($threadbyJohn->title)->assertDontSee($threadNotByJohn->title);
 
+    }
+
+    /** @test */
+    function a_user_can_filter_by_popularity()
+    {
+        $threadWtihTwoReplies = create(Thread::class);
+        create(Reply::class,['thread_id' => $threadWtihTwoReplies->id]);
+        create(Reply::class,['thread_id' => $threadWtihTwoReplies->id]);
+
+        $threadWithThreeReplies = create(Thread::class);
+        create(Reply::class,['thread_id'=> $threadWithThreeReplies->id]);
+        create(Reply::class,['thread_id'=> $threadWithThreeReplies->id]);
+        create(Reply::class,['thread_id'=> $threadWithThreeReplies->id]);
+
+        $threadWithNoReplies = $this->thread;
+
+        $response = $this->getJson('/threads?popular=1')->json();
+        $this->assertEquals([3, 2, 0], array_column($response,'replies_count'));
     }
 }

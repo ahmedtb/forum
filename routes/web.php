@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\ThreadsController;
 use Illuminate\Support\Facades\Route;
@@ -23,12 +25,10 @@ Route::get('/threads',[ThreadsController::class,'index']);
 Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::get('/threads/create',[ThreadsController::class, 'create']);
 Route::post('/threads',[ThreadsController::class, 'store']);
-
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'store']);
-
 Route::get('/threads/{channel}',[ThreadsController::class,'index']);
-
-
+Route::post('/Replies/{reply}/favorites', [FavoritesController::class,'store'] );
+Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

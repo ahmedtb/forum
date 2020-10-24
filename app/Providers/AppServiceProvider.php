@@ -6,6 +6,8 @@ use App\Models\Channel;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+        if($this->app->isLocal())
+        {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
     }
 
     /**
@@ -28,9 +35,17 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+
+
         View::composer('*',function($view) {
-            $view->with('channels', Channel::all());
+            $channel = cache()->rememberForever('channels',function (){
+                return Channel::all();
+            });
+
+            $view->with('channels', $channel);
         });
+
+        Paginator::useBootstrap();
 
     }
 }
