@@ -1,6 +1,7 @@
 To Seed the DataBase, please run:
 
 php artisan tinker
+
 $threads = App\Models\Thread::factory()->count(50)->create();
 
 $threads->each(function ($thread) { 
