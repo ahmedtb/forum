@@ -1,4 +1,4 @@
-To Seed the DataBase, please run:
+<p> To Seed the DataBase, please run: </p>
 
 php artisan tinker
 
