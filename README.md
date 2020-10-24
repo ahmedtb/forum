@@ -1,3 +1,14 @@
+To Seed the DataBase, please run:
+<p align="center">
+php artisan tinker
+$threads = App\Models\Thread::factory()->count(50)->create();
+
+$threads->each(function ($thread) { 
+App\Models\Reply::factory()->count(10)->create(['thread_id' => $thread->id]);
+});
+ </p>
+ in the command Prompt....
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
