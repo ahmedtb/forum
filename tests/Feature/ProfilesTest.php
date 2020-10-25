@@ -25,7 +25,8 @@ class ProfilesTest extends TestCase
      * @test
      */
     function a_profile_of_user_display_his_threads(){
-        $user = create(User::class);
+        $this->signIn();
+        $user = auth()->user();
         $thread = create(Thread::class,['user_id' => $user->id]);
 
         $this->get('profiles/' . $user->name)

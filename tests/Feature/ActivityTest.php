@@ -8,6 +8,7 @@ use App\Models\Thread;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class ActivityTest extends TestCase
@@ -35,5 +36,27 @@ class ActivityTest extends TestCase
         $this->signIn();
         create(Reply::class);
         $this->assertEquals(2,Activity::count());
+    }
+
+    /** @test */
+    function it_fetchs_feed_for_any_user()
+    {
+
+        $this->signIn();
+        create(Thread::class,['user_id' => auth()->user()->id] );
+        create(Thread::class,['user_id' => auth()->user()->id] );
+
+        auth()->user()->activity()->first()->update(['created_at' => Carbon::now()->subWeek()]);
+
+        $feed = Activity::feed(auth()->user());
+        $this->assertTrue(
+            $feed->keys()->contains(Carbon::now()->format('Y-m-d') )
+        );
+
+        $this->assertTrue(
+            $feed->keys()->contains(Carbon::now()->subWeek()->format('Y-m-d') )
+        );
+
+
     }
 }
