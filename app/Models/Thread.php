@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Thread extends Model
 {
     use HasFactory;
+    use RecordActivity;
 
     protected $guarded = [];
 
@@ -20,6 +21,12 @@ class Thread extends Model
         static::addGlobalScope('replyCount', function($builder){
             $builder->withCount('replies');
         });
+
+        static::deleting(function ($thread){
+            $thread->replies()->delete();
+        });
+
+
     }
 
     public function path()
@@ -51,4 +58,5 @@ class Thread extends Model
     {
         return $filters->apply($query);
     }
+
 }

@@ -4,24 +4,29 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Forum Threads</div>
+                @forelse($threads as $thread)
 
-                    <div class="card-body">
-                        @foreach($threads as $thread)
-                            <article>
-                                <div class="level">
+                    <div class="card mb-4">
+                        <div class="card-header">
 
-                                <a href="{{ $thread->path() }}" class="flex" > <h4 >{{ $thread->title }}</h4> </a>
+                            <div class="level">
 
-                                    <strong>{{$thread->replies_count}} {{Illuminate\Support\str::plural('comment',$thread->replies_count)}}</strong>
-                                </div>
+                                <a href="{{ $thread->path() }}" class="flex"><h4>{{ $thread->title }}</h4></a>
+
+                                <strong>{{$thread->replies_count}} {{Illuminate\Support\str::plural('comment',$thread->replies_count)}}</strong>
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-body">
                                 <div class="body">{{ $thread->body  }}</div>
-                            </article>
-                            <hr>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @empty
+                    <p>there is no records at this time. </p>
+                @endforelse
+
             </div>
         </div>
     </div>

@@ -58,6 +58,8 @@ class ThreadsController extends Controller
         return redirect('/threads');
     }
 
+
+
     public function create()
     {
         return view('threads.create');
@@ -83,5 +85,19 @@ class ThreadsController extends Controller
         return $threads->get();
     }
 
+    public function destroy($channel, Thread $thread){
+
+        $this->authorize('update',$thread);
+//        if($thread->user_id != auth()->user()->id)
+//            abort(403, 'you do not have permission to do this');
+
+//        $thread->replies()->delete();
+        $thread->delete();
+
+        if(\request()->wantsJson())
+        return response([],204);
+
+        return redirect('/threads');
+    }
 
 }

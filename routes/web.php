@@ -29,6 +29,7 @@ Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'st
 Route::get('/threads/{channel}',[ThreadsController::class,'index']);
 Route::post('/Replies/{reply}/favorites', [FavoritesController::class,'store'] );
 Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
+Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

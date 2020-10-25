@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reply extends Model
 {
     use HasFactory;
-    use Favoritable;
+    use Favoritable, RecordActivity;
 
     protected $guarded = [];
 
@@ -19,4 +19,8 @@ class Reply extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function thread()
+    {
+        return $this->belongsTo(Thread::class);
+    }
 }
