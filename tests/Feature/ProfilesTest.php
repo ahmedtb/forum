@@ -11,9 +11,7 @@ use Tests\TestCase;
 
 class ProfilesTest extends TestCase
 {use  DatabaseMigrations;
-    /**
-     * @test
-     */
+    /** @test */
     function a_user_can_view_profiles()
     {
         $this->withoutExceptionHandling();
@@ -21,9 +19,8 @@ class ProfilesTest extends TestCase
         $response = $this->get('profiles/' . $user->name);
         $response->assertSee($user->name);
     }
-    /**
-     * @test
-     */
+
+    /** @test */
     function a_profile_of_user_display_his_threads(){
         $this->signIn();
         $user = auth()->user();

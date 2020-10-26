@@ -55,7 +55,7 @@ class ThreadsController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
-        return redirect('/threads');
+        return redirect('/threads')->with('flash', 'Your thread has been published!');
     }
 
 

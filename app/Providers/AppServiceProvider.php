@@ -33,19 +33,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        schema::defaultstringlength(191);
 
-
-
-        View::composer('*',function($view) {
-            $channel = cache()->rememberForever('channels',function (){
-                return Channel::all();
+        view::composer('*',function($view) {
+            $channel = cache()->rememberforever('channels',function (){
+                return channel::all();
             });
-
             $view->with('channels', $channel);
         });
 
-        Paginator::useBootstrap();
+        paginator::usebootstrap();
 
     }
 }

@@ -63,7 +63,7 @@ class CreateThreadTest extends TestCase
     }
 
     /** @test */
-    function a_thread_can_be_deleted()
+    function a_thread_can_be_deleted_by_auth_user()
     {
         $this->signIn();
         $this->withoutExceptionHandling();
@@ -71,6 +71,10 @@ class CreateThreadTest extends TestCase
         $reply = create(Reply::class, ['thread_id' => $thread->id]);
         $this->json("DELETE", $thread->path())->assertStatus(204);
         $this->assertDatabaseMissing('threads', ['id' => $thread->id])->assertDatabaseMissing('replies', ['id' => $reply->id]);
+
+//        $this->assertDatabaseMissing('activities',['subject_id' => $thread->id, 'subject_type' => get_class($thread)]);
+//        $this->assertDatabaseMissing('activities',['subject_id' => $reply->id, 'subject_type' => get_class($reply)]);
+        $this->assertDatabaseCount('activities',0);
     }
 
     /** @test */
