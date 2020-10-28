@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Reply extends Model
 {
@@ -13,6 +14,7 @@ class Reply extends Model
     protected $guarded = [];
 
     protected $with = ['owner', 'favorites'];
+    protected $appends = ['favoritesCount', 'isFavorited'];
 
     public function owner()
     {
@@ -27,5 +29,10 @@ class Reply extends Model
     public function path()
     {
         return  $this->thread->path() . "#reply-{$this->id}";
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('d-M-Y H:i:s');
     }
 }

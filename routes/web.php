@@ -25,13 +25,19 @@ Route::get('/threads',[ThreadsController::class,'index']);
 Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::get('/threads/create',[ThreadsController::class, 'create']);
 Route::post('/threads',[ThreadsController::class, 'store']);
+
+Route::get('/threads/{channel}/{thread}/replies', [RepliesController::class,'index']);
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'store']);
 
 Route::delete('/replies/{reply}', [RepliesController::class,'destroy']);
 Route::patch('/replies/{reply}', [RepliesController::class, 'update']);
 
 Route::get('/threads/{channel}',[ThreadsController::class,'index']);
-Route::post('/Replies/{reply}/favorites', [FavoritesController::class,'store'] );
+
+Route::delete('/replies/{reply}/favorites', [FavoritesController::class,'destroy'] );
+Route::post('/replies/{reply}/favorites', [FavoritesController::class,'store'] );
+
+
 Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
 Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy']);
 Auth::routes();

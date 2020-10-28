@@ -18,11 +18,17 @@ class FavoritesController extends Controller
     public function store(Reply $reply)
     {
         $reply->favorite(auth()->user()->id);
-        return back();
+//        return back();
 //         \DB::table('favorites')->insert([
 //            'user_id' => auth()->user()->id,
 //            'favorited_id' => $reply->id,
 //            'favorited_type' => get_class($reply)
 //        ]);
+    }
+
+
+        public function destroy(Reply $reply)
+    {
+        $reply->unfavorite();
     }
 }

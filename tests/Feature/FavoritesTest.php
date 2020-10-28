@@ -16,7 +16,7 @@ class FavoritesTest extends TestCase
     {
 //        $this->withoutExceptionHandling();
 
-        $response = $this->post('/Replies/1/favorites')->assertRedirect('/login');
+        $response = $this->post('/replies/1/favorites')->assertRedirect('/login');
     }
 
 /** @test */
@@ -26,10 +26,27 @@ class FavoritesTest extends TestCase
         $this->withoutExceptionHandling();
         $reply = create(Reply::class);
 
-        $this->post('/Replies/' . $reply->id . '/favorites');
+        $this->post('/replies/' . $reply->id . '/favorites');
 
         $this->assertCount(1,$reply->favorites);
     }
+
+    /** @test */
+    function a_auth_user_can_unfavorite_reply()
+    {
+        $this->signIn();
+        $this->withoutExceptionHandling();
+        $reply = create(Reply::class);
+
+        $this->post('/replies/' . $reply->id . '/favorites');
+
+//        $this->assertCount(1,$reply->favorites);
+
+        $this->delete('/replies/' . $reply->id . '/favorites');
+
+        $this->assertCount(0,$reply->fresh()->favorites);
+    }
+
 /** @test */
     function a_auth_user_can_favorite_reply_only_once()
     {
@@ -37,8 +54,8 @@ class FavoritesTest extends TestCase
         $this->withoutExceptionHandling();
         $reply = create(Reply::class);
 
-            $this->post('/Replies/' . $reply->id . '/favorites');
-            $this->post('/Replies/' . $reply->id . '/favorites');
+            $this->post('/replies/' . $reply->id . '/favorites');
+            $this->post('/replies/' . $reply->id . '/favorites');
 
         $this->assertCount(1,$reply->favorites);
     }
