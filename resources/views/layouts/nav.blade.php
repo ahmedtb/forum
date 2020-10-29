@@ -32,6 +32,9 @@
                         <a class="dropdown-item" href="/threads?popular=1">
                             popular Threads
                         </a>
+                        <a class="dropdown-item" href="/threads?unanswered=1">
+                            unanswered threads
+                        </a>
                     </div>
 
                 </li>

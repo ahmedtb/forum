@@ -44,6 +44,8 @@ export default {
         refresh({data}) {
             this.dataSet = data;
             this.items = data.data;
+
+            window.scrollTo(0, 0);
         }
     }
 

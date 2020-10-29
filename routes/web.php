@@ -4,6 +4,8 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\ThreadsController;
+use App\Http\Controllers\ThreadSubscriptionsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,9 @@ Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'st
 
 Route::delete('/replies/{reply}', [RepliesController::class,'destroy']);
 Route::patch('/replies/{reply}', [RepliesController::class, 'update']);
+
+Route::post('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class,'store'])->middleware('auth');
+Route::delete('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class,'destroy'])->middleware('auth');
 
 Route::get('/threads/{channel}',[ThreadsController::class,'index']);
 
