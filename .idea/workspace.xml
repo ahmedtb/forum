@@ -23,22 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="840231b2-42bb-4348-9a9e-764826aa60df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/SubscribeButton.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Filters/ThreadFilters.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Filters/ThreadFilters.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RepliesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RepliesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Reply.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Reply.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Thread.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Thread.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_082253_create_threads_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_19_082253_create_threads_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Replies.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Replies.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/pages/Thread.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/pages/Thread.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/threads/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/threads/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/ParticipateInForumTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/ParticipateInForumTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/ReadsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/ReadsTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/ThreadTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/ThreadTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +177,11 @@
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="PHPUnit.ProfilesTest.a_profile_of_user_display_his_threads">
+  <component name="RunManager" selected="PHPUnit.Feature">
+    <configuration name="Feature" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner directory="$PROJECT_DIR$/tests/Feature" />
+      <method v="2" />
+    </configuration>
     <configuration name="ProfilesTest.a_profile_of_user_display_his_threads" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Feature\ProfilesTest" file="$PROJECT_DIR$/tests/Feature/ProfilesTest.php" method="a_profile_of_user_display_his_threads" scope="Method" />
       <method v="2" />
@@ -201,6 +192,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.Feature" />
         <item itemvalue="PHPUnit.ProfilesTest.a_profile_of_user_display_his_threads" />
       </list>
     </recent_temporary>
@@ -240,7 +232,8 @@
       <workItem from="1603870567015" duration="20394000" />
       <workItem from="1603892970971" duration="199000" />
       <workItem from="1603893526099" duration="4998000" />
-      <workItem from="1603956525511" duration="8289000" />
+      <workItem from="1603956525511" duration="19052000" />
+      <workItem from="1604128871707" duration="777000" />
     </task>
     <servers />
   </component>
@@ -260,10 +253,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603370375894">
+    <state x="547" y="175" key="#CLI_Interpreters" timestamp="1604129461394">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603370375894" />
+    <state x="547" y="175" key="#CLI_Interpreters/0.0.1920.1040@0.0.1920.1040" timestamp="1604129461394" />
+    <state x="674" y="163" key="#PHP" timestamp="1604129470219">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="674" y="163" key="#PHP/0.0.1920.1040@0.0.1920.1040" timestamp="1604129470219" />
+    <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603978624838">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603978624838" />
     <state x="765" y="202" key="#com.intellij.ide.util.MemberChooser" timestamp="1603372219826">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -288,6 +289,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="983" y="285" key="#com.jetbrains.php.refactoring.pullPush.pullUp.PhpPullUpDialog#1/0.0.1920.1040@0.0.1920.1040" timestamp="1603623923584" />
+    <state x="834" y="270" key="EnvironmentVariablesDialog" timestamp="1604129241858">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="834" y="270" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604129241858" />
     <state x="794" y="443" key="NewPhpFileDialog" timestamp="1603705559938">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -296,10 +301,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603630116067" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1603962821502">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1603979848467">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1603962821502" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1603979848467" />
     <state x="777" y="209" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1603612758862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -316,13 +321,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="601" y="250" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603619068979" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1603278236532">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1603970125232">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603278236532" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603963957947">
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603970125232" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604129576995">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603963957947" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604129576995" />
   </component>
 </project>
