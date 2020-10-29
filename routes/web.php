@@ -4,6 +4,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\ThreadsController;
+use App\Http\Controllers\UserNotificationsController;
 use App\Http\Controllers\ThreadSubscriptionsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,10 @@ Route::post('/replies/{reply}/favorites', [FavoritesController::class,'store'] )
 
 Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
 Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy']);
+Route::get('/profiles/{user}/notifications', [UserNotificationsController::class,'index']);
+Route::delete('/profiles/{user}/notifications/{notification}', [UserNotificationsController::class,'destroy']);
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -34,7 +34,7 @@ class SubscribeToThreadsTest extends TestCase
 
         // A notification should be prepared for the user.
         // TODO:
-        // $this->assertCount(1, auth()->user()->notifications);
+//         $this->assertCount(1, auth()->user()->notifications);
     }
 
     /** @test */
