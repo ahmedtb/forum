@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ParticipateInForumTest extends TestCase
@@ -44,13 +45,15 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     function a_reply_requires_body()
     {
+        $this->withoutExceptionHandling();
         $this->signIn();
 
         $reply = make(Reply::class,['body' => null]);
         $thread = create(Thread::class);
 
 
-        $this->post($thread->path() . '/replies', $reply->toArray())->assertSessionHasErrors('body');
+        $response = $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertSessionHasErrors('body');
     }
 
     /** @test */
@@ -110,10 +113,27 @@ class ParticipateInForumTest extends TestCase
             'body' => 'Yahoo Customer Support'
         ]);
 
-        $this->expectException(\Exception::class);
+//        $this->expectException(\Exception::class);
 
-        $this->post($thread->path() . '/replies', $reply->toArray());
+        $this->post($thread->path() . '/replies', $reply->toArray())->assertStatus(422);
     }
+
+    /** @test */
+    function users_may_only_reply_a_maximum_of_once_per_minute()
+    {
+        $this->signIn();
+
+        $thread = create('App\Models\Thread');
+        $reply = make('App\Models\Reply');
+
+        $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertStatus(Response::HTTP_CREATED);
+
+        $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertStatus(429);
+    }
+
+
 }
 
 

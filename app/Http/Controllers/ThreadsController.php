@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Filters\ThreadFilters;
-use App\Inspections\Spam;
 use App\Models\Channel;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
 {
-    //
-
-
 
     public function __construct(){
         $this->middleware('auth')->except(['index', 'show']);
@@ -37,14 +33,14 @@ class ThreadsController extends Controller
         return view('threads.show',compact('thread'));
     }
 
-    public function store(Request $request, Spam $spam){
+    public function store(Request $request){
         $this->validate($request,[
-           'title' => 'required',
-            'body' => 'required',
+           'title' => 'required|spamfree',
+            'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id'
         ]);
 
-        $spam->detect(request('body'));
+//        $spam->detect(request('body'));
 
         Thread::create([
             'title' => request('title'),
