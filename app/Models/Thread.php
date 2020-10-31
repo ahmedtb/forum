@@ -52,9 +52,17 @@ class Thread extends Model
 
         $reply = $this->replies()->create($reply);
 
+<<<<<<< HEAD
         $this->notifySubscriber($reply);
 
 //        event(new ThreadHasNewReply($this,$reply));
+=======
+        $this->subscriptions
+            ->where('user_id', '!=', $reply->user_id)
+            ->each
+            ->notify( $reply);
+
+>>>>>>> refs/remotes/origin/master
 
         return $reply;
     }

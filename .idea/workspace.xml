@@ -23,10 +23,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="840231b2-42bb-4348-9a9e-764826aa60df" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Thread.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Thread.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Unit/ThreadTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/ThreadTest.php" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/resources/js/components/UserNotifications.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Thread.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Thread.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/ThreadSubscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ThreadSubscription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/SubscribeToThreadsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/SubscribeToThreadsTest.php" afterDir="false" />
+>>>>>>> refs/remotes/origin/master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,8 +246,12 @@
       <workItem from="1603870567015" duration="20394000" />
       <workItem from="1603892970971" duration="199000" />
       <workItem from="1603893526099" duration="4998000" />
+<<<<<<< HEAD
       <workItem from="1603956525511" duration="19052000" />
       <workItem from="1604128871707" duration="2985000" />
+=======
+      <workItem from="1603956525511" duration="18956000" />
+>>>>>>> refs/remotes/origin/master
     </task>
     <servers />
   </component>
@@ -254,6 +271,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="547" y="175" key="#CLI_Interpreters" timestamp="1604129461394">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -263,6 +281,13 @@
     </state>
     <state x="674" y="163" key="#PHP/0.0.1920.1040@0.0.1920.1040" timestamp="1604129470219" />
     <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603978624838">
+=======
+    <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603978624838">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603978624838" />
+    <state x="765" y="202" key="#com.intellij.ide.util.MemberChooser" timestamp="1603372219826">
+>>>>>>> refs/remotes/origin/master
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="729" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603978624838" />
@@ -326,9 +351,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603970125232" />
+<<<<<<< HEAD
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604131483264">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604131483264" />
+=======
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603979803269">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603979803269" />
+>>>>>>> refs/remotes/origin/master
   </component>
 </project>

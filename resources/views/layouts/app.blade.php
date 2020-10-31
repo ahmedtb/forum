@@ -9,7 +9,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/origin/master
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
