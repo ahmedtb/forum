@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Filters\ThreadFilters;
+use App\Providers\ThreadHasNewReply;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,12 +51,10 @@ class Thread extends Model
     {
 
         $reply = $this->replies()->create($reply);
-        
-//        $this->subscriptions
-//            ->where('user_id', '!=', $reply->user_id)
-//            ->each
-//            ->notify( $reply);
 
+        $this->notifySubscriber($reply);
+
+//        event(new ThreadHasNewReply($this,$reply));
 
         return $reply;
     }
@@ -90,5 +89,16 @@ class Thread extends Model
         return $this->subscriptions()
             ->where('user_id', auth()->id())
             ->exists();
+    }
+
+    /**
+     * @param Model $reply
+     */
+    protected function notifySubscriber(Model $reply): void
+    {
+        $this->subscriptions
+            ->where('user_id', '!=', $reply->user_id)
+            ->each
+            ->notify($reply);
     }
 }
