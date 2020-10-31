@@ -11,7 +11,17 @@
 
                             <div class="level">
 
-                                <a href="{{ $thread->path() }}" class="flex"><h4>{{ $thread->title }}</h4></a>
+                                <a href="{{ $thread->path() }}" class="flex">
+
+                                    @if (auth()->check() && $thread->hasUpdatesFor(auth()->user()))
+                                        <strong>
+                                            {{ $thread->title }}
+                                        </strong>
+                                    @else
+                                        {{ $thread->title }}
+                                    @endif
+
+                                </a>
 
                                 <strong>{{$thread->replies_count}} {{Illuminate\Support\str::plural('comment',$thread->replies_count)}}</strong>
                             </div>

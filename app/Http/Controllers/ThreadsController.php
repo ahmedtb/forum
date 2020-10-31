@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\ThreadFilters;
+use App\Inspections\Spam;
 use App\Models\Channel;
 use App\Models\Thread;
 use Illuminate\Http\Request;
@@ -30,18 +31,20 @@ class ThreadsController extends Controller
 
     public function show($channelId, Thread $thread)
     {
-
+        if (auth()->check()) {
+            auth()->user()->read($thread);
+        }
         return view('threads.show',compact('thread'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request, Spam $spam){
         $this->validate($request,[
            'title' => 'required',
             'body' => 'required',
             'channel_id' => 'required|exists:channels,id'
-
-
         ]);
+
+        $spam->detect(request('body'));
 
         Thread::create([
             'title' => request('title'),

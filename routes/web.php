@@ -25,6 +25,8 @@ Route::get('/', function () {
 });
 
 Route::get('/threads',[ThreadsController::class,'index']);
+
+
 Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::get('/threads/create',[ThreadsController::class, 'create']);
 Route::post('/threads',[ThreadsController::class, 'store']);
