@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ParticipateInForumTest extends TestCase
-{use DatabaseMigrations;
+{
+    use DatabaseMigrations;
 
 /** @test */
     function a_non_authenticated_user_can_not_reply()
@@ -45,14 +46,13 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     function a_reply_requires_body()
     {
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
         $this->signIn();
 
         $reply = make(Reply::class,['body' => null]);
         $thread = create(Thread::class);
 
-
-        $response = $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->post($thread->path() . '/replies', $reply->toArray())
             ->assertSessionHasErrors('body');
     }
 
@@ -105,7 +105,7 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     function replies_that_contain_spam_may_not_be_created()
     {
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
         $this->signIn();
 
         $thread = create(Thread::class);
@@ -115,7 +115,8 @@ class ParticipateInForumTest extends TestCase
 
 //        $this->expectException(\Exception::class);
 
-        $this->post($thread->path() . '/replies', $reply->toArray())->assertStatus(422);
+        $this->json('post', $thread->path() . '/replies', $reply->toArray())
+            ->assertStatus(422);
     }
 
     /** @test */
@@ -125,6 +126,7 @@ class ParticipateInForumTest extends TestCase
 
         $thread = create('App\Models\Thread');
         $reply = make('App\Models\Reply');
+
 
         $this->post($thread->path() . '/replies', $reply->toArray())
             ->assertStatus(Response::HTTP_CREATED);

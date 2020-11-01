@@ -39,6 +39,9 @@
         }
         [v-cloak] { display: none; }
     </style>
+
+    @yield('head')
+
 </head>
 <body>
 <div id="app">
@@ -49,6 +52,7 @@
         <flash message="{{session('flash')}}"></flash>
     </main>
 </div>
+@yield('scripts')
 </body>
 
 </html>

@@ -53,6 +53,18 @@ class Reply extends Model
 
     }
 
+    /**
+     * Fetch all mentioned users within the reply's body.
+     *
+     * @return array
+     */
+    public function mentionedUsers()
+    {
+        preg_match_all('/@([\w\-]+)/', $this->body, $matches);
+
+        return $matches[1];
+    }
+
     public function path()
     {
         return  $this->thread->path() . "#reply-{$this->id}";
@@ -61,5 +73,20 @@ class Reply extends Model
     public function getCreatedAtAttribute($date)
     {
         return Carbon::parse($date)->format('d-M-Y H:i:s');
+    }
+
+
+    /**
+     * Set the body attribute.
+     *
+     * @param string $body
+     */
+    public function setBodyAttribute($body)
+    {
+        $this->attributes['body'] = preg_replace(
+            '/@([\w\-]+)/',
+            '<a href="/profiles/$1">$0</a>',
+            $body
+        );
     }
 }

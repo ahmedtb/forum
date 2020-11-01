@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use http\Env\Request;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +35,24 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+//        $this->renderable(function (ValidationException $e,Request $request) {
+//                return response('Sorry, validation failed.', 422);
+//        });
     }
+
+    public function render($request, \Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+            if ($request->expectsJson()) {
+                return response('Sorry, validation failed.', 422);
+            }
+        }
+
+        if ($exception instanceof ThrottleRequestsException) {
+            return response($exception->getMessage(), 429);
+        }
+
+        return parent::render($request, $exception);
+    }
+
 }

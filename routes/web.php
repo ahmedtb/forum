@@ -8,7 +8,7 @@ use App\Http\Controllers\UserNotificationsController;
 use App\Http\Controllers\ThreadSubscriptionsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +51,7 @@ Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy
 Route::get('/profiles/{user}/notifications', [UserNotificationsController::class,'index']);
 Route::delete('/profiles/{user}/notifications/{notification}', [UserNotificationsController::class,'destroy']);
 
+Route::get('api/users', [UsersController::class, 'index']);
 
 Auth::routes();
 

@@ -12,7 +12,9 @@ use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class ActivityTest extends TestCase
-{use DatabaseMigrations;
+{
+    use DatabaseMigrations;
+
     /** @test */
     function it_records_an_activity_when_thread_created()
     {
@@ -56,7 +58,5 @@ class ActivityTest extends TestCase
         $this->assertTrue(
             $feed->keys()->contains(Carbon::now()->subWeek()->format('Y-m-d') )
         );
-
-
     }
 }
