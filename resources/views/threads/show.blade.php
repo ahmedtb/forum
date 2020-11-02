@@ -13,6 +13,14 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
+
+                            <img src="{{ $thread->creator->avatar_path }}"
+                                 alt="{{ $thread->creator->name }}"
+                                 width="25"
+                                 height="25"
+                                 class="mr-1">
+
+
                             <div class="level">
                             <span class="flex">
                         <a href="{{route('profile',$thread->creator->name)}}"> {{$thread->creator->name }} </a> posted:

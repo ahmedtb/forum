@@ -8,10 +8,11 @@
 
                 <div class="page-header">
 
-                    <h1>
-                        {{$profileUser->name}}
+{{--                    <h1>--}}
+{{--                        {{$profileUser->name}}--}}
 {{--                        <small> since {{$profileUser->created_at->diffForHumans()}}</small>--}}
-                    </h1>
+{{--                    </h1>--}}
+                    <avatar-form :user="{{ $profileUser }}"></avatar-form>
 
                 </div>
 

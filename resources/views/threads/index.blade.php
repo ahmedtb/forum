@@ -4,40 +4,32 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @forelse($threads as $thread)
+                @include ('threads._list')
+                {{ $threads->render() }}
+            </div>
 
-                    <div class="card mb-4">
-                        <div class="card-header">
-
-                            <div class="level">
-
-                                <a href="{{ $thread->path() }}" class="flex">
-
-                                    @if (auth()->check() && $thread->hasUpdatesFor(auth()->user()))
-                                        <strong>
-                                            {{ $thread->title }}
-                                        </strong>
-                                    @else
-                                        {{ $thread->title }}
-                                    @endif
-
-                                </a>
-
-                                <strong>{{$thread->replies_count}} {{Illuminate\Support\str::plural('comment',$thread->replies_count)}}</strong>
-                            </div>
-
-
+            <div class="col-md-4">
+                @if (count($trending))
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Trending Threads
                         </div>
 
-                        <div class="card-body">
-                                <div class="body">{{ $thread->body  }}</div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                @foreach ($trending as $thread)
+                                    <li class="list-group-item">
+                                        <a href="{{ url($thread->path) }}">
+                                            {{ $thread->title }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
-                @empty
-                    <p>there is no records at this time. </p>
-                @endforelse
-
+                @endif
             </div>
+
         </div>
     </div>
 @endsection
