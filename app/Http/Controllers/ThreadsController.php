@@ -36,6 +36,7 @@ class ThreadsController extends Controller
         }
 
         $trending->push($thread);
+        $thread->increment('visits');
 
         return view('threads.show',compact('thread'));
     }
@@ -47,7 +48,6 @@ class ThreadsController extends Controller
             'channel_id' => 'required|exists:channels,id'
         ]);
 
-//        $spam->detect(request('body'));
 
         Thread::create([
             'title' => request('title'),

@@ -26,14 +26,13 @@ class ThreadFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'body' => $this->faker->paragraph,
-            'user_id' => function()
-            {
+            'user_id' => function () {
                 return User::factory()->create()->id;
             },
-            'channel_id' => function()
-    {
-        return Channel::factory()->create()->id;
-    }
+            'channel_id' => function () {
+                return Channel::factory()->create()->id;
+            },
+            'visits' => 0
         ];
     }
 }

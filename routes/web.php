@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\UserAvatarController;
+use App\Http\Controllers\RegisterConfirmationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/threads',[ThreadsController::class,'index']);
+Route::get('/threads',[ThreadsController::class,'index'])->name('threads');;
 
 
 Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::get('/threads/create',[ThreadsController::class, 'create']);
-Route::post('/threads',[ThreadsController::class, 'store']);
+
+Route::post('/threads',[ThreadsController::class, 'store'])->middleware('must-be-confirmed');
 
 Route::get('/threads/{channel}/{thread}/replies', [RepliesController::class,'index']);
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'store']);
@@ -52,6 +54,8 @@ Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profi
 Route::delete('/threads/{channel}/{thread}', [ThreadsController::class, 'destroy']);
 Route::get('/profiles/{user}/notifications', [UserNotificationsController::class,'index']);
 Route::delete('/profiles/{user}/notifications/{notification}', [UserNotificationsController::class,'destroy']);
+
+Route::get('/register/confirm', [RegisterConfirmationController::class,'index'] )->name('register.confirm');
 
 Route::get('api/users', [UsersController::class, 'index']);
 Route::post('api/users/{user}/avatar', [UserAvatarController::class,'store'])->middleware('auth')->name('avatar');
