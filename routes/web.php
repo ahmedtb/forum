@@ -38,7 +38,7 @@ Route::post('/threads',[ThreadsController::class, 'store'])->middleware('must-be
 Route::get('/threads/{channel}/{thread}/replies', [RepliesController::class,'index']);
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'store']);
 
-Route::delete('/replies/{reply}', [RepliesController::class,'destroy']);
+Route::delete('/replies/{reply}', [RepliesController::class,'destroy'])->name('replies.destroy');
 Route::patch('/replies/{reply}', [RepliesController::class, 'update']);
 
 Route::post('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class,'store'])->middleware('auth');
