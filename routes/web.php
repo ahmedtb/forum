@@ -57,6 +57,8 @@ Route::delete('/profiles/{user}/notifications/{notification}', [UserNotification
 
 Route::get('/register/confirm', [RegisterConfirmationController::class,'index'] )->name('register.confirm');
 
+Route::post('/replies/{reply}/best', 'App\Http\Controllers\BestRepliesController@store')->name('best-replies.store');
+
 Route::get('api/users', [UsersController::class, 'index']);
 Route::post('api/users/{user}/avatar', [UserAvatarController::class,'store'])->middleware('auth')->name('avatar');
 

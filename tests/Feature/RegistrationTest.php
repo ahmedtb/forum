@@ -15,7 +15,7 @@ class RegistrationTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function a_confirmation_email_is_sent_upon_registration()
+    function a_confirmation_email_is_sent_upon_registration()
     {
         $this->withoutExceptionHandling();
 
@@ -55,7 +55,10 @@ class RegistrationTest extends TestCase
         $this->get(route('register.confirm', ['token' => $user->confirmation_token]))
             ->assertRedirect(route('threads'));
 
-        $this->assertTrue($user->fresh()->confirmed);
+        tap($user->fresh(), function ($user) {
+            $this->assertTrue($user->confirmed);
+            $this->assertNull($user->confirmation_token);
+        });
     }
 
     /** @test */

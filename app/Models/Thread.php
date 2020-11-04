@@ -6,6 +6,7 @@ use App\Filters\ThreadFilters;
 use App\Providers\ThreadReceivedNewReply;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Thread extends Model
 {
@@ -25,11 +26,15 @@ class Thread extends Model
         static::deleting(function ($thread){
             $thread->replies->each->delete();
         });
+
+        static::created(function ($thread) {
+            $thread->update(['slug' => $thread->title]);
+        });
     }
 
     public function path()
     {
-        return "/threads/{$this->channel->slug}/{$this->id}";
+        return "/threads/{$this->channel->slug}/{$this->slug}";
     }
 
     public function replies()
@@ -108,14 +113,37 @@ class Thread extends Model
         return $this->updated_at > cache($key);
     }
 
-//    /**
-//     * @param Model $reply
-//     */
-//    protected function notifySubscriber(Model $reply): void
-//    {
-//        $this->subscriptions
-//            ->where('user_id', '!=', $reply->user_id)
-//            ->each
-//            ->notify($reply);
-//    }
+    /**
+     * Get the route key name.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Set the proper slug attribute.
+     *
+     * @param string $value
+     */
+    public function setSlugAttribute($value)
+    {
+        if (static::whereSlug($slug = Str::slug($value))->exists()) {
+            $slug = "{$slug}-{$this->id}";
+        }
+
+        $this->attributes['slug'] = $slug;
+    }
+
+    /**
+     * Mark the given reply as the best answer.
+     *
+     * @param Reply $reply
+     */
+    public function markBestReply(Reply $reply)
+    {
+        $this->update(['best_reply_id' => $reply->id]);
+    }
 }

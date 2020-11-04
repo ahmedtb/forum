@@ -1,42 +1,45 @@
 <template>
 
-<div class="card">
+    <div :id="'reply-'+id" class="card" >
 
-    <div class="card-header">
-        <div class="level">
-            <h5 class="flex">
-                <a :href="'/profiles/'+data.owner.name"
-                   v-text="data.owner.name"> </a>
-                <span v-text="ago"></span>
-            </h5>
+        <div class="card-header" :class="isBest ? 'bg-success': ''">
+            <div class="level">
+                <h5 class="flex">
+                    <a :href="'/profiles/'+data.owner.name"
+                       v-text="data.owner.name"> </a>
+                    <span v-text="ago"></span>
+                </h5>
 
-            <div v-if="signedIn">
-                <favorite :reply="data"></favorite>
+                <div v-if="signedIn">
+                    <favorite :reply="data"></favorite>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body" :id="'reply-'+id">
+            <div v-if="editing">
+                <form @submit="update">
+                    <div class="form-group">
+                        <textarea class="form-control" v-model="body" required></textarea>
+                    </div>
+                    <button class="btn btn-xs btn-primary">Update</button>
+                    <button class="btn btn-xs btn-link" @click="editing = false" type="button">Cancel</button>
+                </form>
+            </div>
+            <div v-else v-html="body"></div>
+        </div>
+        <!--    @can ('update', $reply)-->
+        <div class="card-footer level">
+            <div v-if="authorize('updateReply', reply)">
+                <button class="btn btn-primary mr-1" @click="editing = true">Edit</button>
+                <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
             </div>
 
+            <button class="btn btn-xs btn-primary ml-a" @click="markBestReply" v-show="! isBest">Best Reply?</button>
         </div>
+        <!--    @endcan-->
     </div>
-
-    <div class="card-body" :id="'reply-'+id">
-        <div v-if="editing">
-            <form @submit="update">
-            <div class="form-group">
-                <textarea class="form-control" v-model="body" required></textarea>
-            </div>
-
-                <button class="btn btn-xs btn-primary">Update</button>
-                <button class="btn btn-xs btn-link" @click="editing = false" type="button">Cancel</button>
-            </form>
-        </div>
-        <div v-else v-html="body"></div>
-    </div>
-<!--    @can ('update', $reply)-->
-    <div class="panel-footer level"  v-if="canUpdate">
-        <button class="btn btn-primary mr-1" @click="editing = true">Edit</button>
-        <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
-    </div>
-<!--    @endcan-->
-</div>
 
 </template>>
 
@@ -47,12 +50,14 @@ import moment from 'moment';
 
 export default {
     props: ['data'],
-    components: { Favorite },
+    components: {Favorite},
     data() {
         return {
             editing: false,
             id: this.data.id,
-            body: this.data.body
+            body: this.data.body,
+            isBest: this.data.isBest,
+            reply: this.data
         };
     },
 
@@ -61,16 +66,22 @@ export default {
             return moment(this.data.created_at).fromNow() + '...';
 
         },
-        signedIn() {
-            return window.App.signedIn;
-        },
-        canUpdate() {
-            return this.authorize(user => this.data.user_id == user.id);
-        }
+        // signedIn() {
+        //     return window.App.signedIn;
+        // },
+        // canUpdate() {
+        //     return this.authorize(user => this.data.user_id == user.id);
+        // }
+    },
+
+    created() {
+        window.events.$on('best-reply-selected', id => {
+            this.isBest = (id === this.id);
+        });
     },
 
     methods: {
-        update(){
+        update() {
             axios.patch(
                 '/replies/' + this.data.id, {
                     body: this.body
@@ -82,7 +93,12 @@ export default {
             flash('updtated');
         },
 
-        destroy(){
+        markBestReply() {
+            axios.post('/replies/' + this.data.id + '/best');
+            window.events.$emit('best-reply-selected', this.data.id);
+        },
+
+        destroy() {
             axios.delete('/replies/' + this.data.id);
             this.$emit('deleted', this.data.id);
         }

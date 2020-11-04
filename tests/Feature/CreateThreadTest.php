@@ -107,9 +107,41 @@ class CreateThreadTest extends TestCase
             ->assertSessionHas('flash', 'You must first confirm your email address.');
     }
 
+    /** @test */
+    function a_thread_requires_a_unique_slug()
+    {
+        $this->signIn();
 
+        $thread = create('App\Models\Thread', ['title' => 'Foo Title']);
 
-    public function publishThread($overrides = [])
+        $this->assertEquals($thread->slug, 'foo-title');
+
+        $thread = $this->postJson(route('threads'), $thread->toArray())->json();
+
+        $this->assertTrue(Thread::whereSlug('foo-title-2')->exists());
+
+        $this->post(route('threads'), $thread);
+
+        $this->assertEquals("foo-title-{$thread['id']}", $thread['slug']);
+    }
+
+    /** @test */
+    function a_thread_with_a_title_that_ends_in_a_number_should_generate_the_proper_slug()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+
+        $thread = create('App\Models\Thread', ['title' => 'Some Title 24']);
+
+        $thread = $this->postJson(route('threads'), $thread->toArray())->json();
+
+//        dd($thread);
+
+        $this->assertEquals("some-title-24-{$thread['id']}", $thread['slug']);
+    }
+
+        public function publishThread($overrides = [])
     {
         $this->signIn();
         $thread = make(Thread::class,$overrides);
