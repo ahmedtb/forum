@@ -25,7 +25,8 @@ abstract class Filters
 
         $this->builder = $builder;
 
-        foreach ($this->getFilters() as $filter => $value) {
+        foreach ($this->getFilters() as $filter => $value)
+        {
             if (method_exists($this,$filter))
                 $this->$filter($value);
         }
@@ -37,6 +38,6 @@ abstract class Filters
      */
     protected function getFilters(): array
     {
-        return $this->request->only($this->filters);
+        return array_filter($this->request->only($this->filters) );
     }
 }

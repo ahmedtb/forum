@@ -106,4 +106,14 @@ class User extends Authenticatable
     {
         return asset($avatar ? '/storage/'. $avatar : 'storage/avatars/default.png');
     }
+
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return in_array($this->name, ['JohnDoe', 'JaneDoe']);
+    }
 }

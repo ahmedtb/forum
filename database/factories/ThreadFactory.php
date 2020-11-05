@@ -35,7 +35,8 @@ class ThreadFactory extends Factory
                 return Channel::factory()->create()->id;
             },
             'visits' => 0,
-            'slug' => str::slug($title)
+            'slug' => str::slug($title),
+            'locked' => false
         ];
     }
 }

@@ -18,6 +18,16 @@ class Thread extends Model
     protected $with = ['creator','channel'];
     protected $appends = ['isSubscribedTo'];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'locked' => 'boolean'
+    ];
+
+
     public static function boot()
     {
         Parent::boot();
@@ -146,4 +156,7 @@ class Thread extends Model
     {
         $this->update(['best_reply_id' => $reply->id]);
     }
+
+
+
 }

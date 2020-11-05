@@ -38,6 +38,10 @@ Route::post('/threads',[ThreadsController::class, 'store'])->middleware('must-be
 Route::get('/threads/{channel}/{thread}/replies', [RepliesController::class,'index']);
 Route::post('/threads/{channel}/{thread}/replies', [RepliesController::class,'store']);
 
+Route::post('locked-threads/{thread}', 'App\Http\Controllers\LockedThreadsController@store')->name('locked-threads.store')->middleware('admin');
+Route::delete('locked-threads/{thread}', 'App\Http\Controllers\LockedThreadsController@destroy')->name('locked-threads.destroy')->middleware('admin');
+
+
 Route::delete('/replies/{reply}', [RepliesController::class,'destroy'])->name('replies.destroy');
 Route::patch('/replies/{reply}', [RepliesController::class, 'update']);
 
